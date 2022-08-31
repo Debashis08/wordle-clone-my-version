@@ -17,9 +17,9 @@ button{
     font-weight: bold;
     cursor: pointer;
     background: #d3d6da;
-    padding: 22px 13px;
+    padding: 22px 14px;
     border: none;
-    font-size: 12px;
+    font-size: 14px;
     text-transform: uppercase;
 }
 .key-correct{
