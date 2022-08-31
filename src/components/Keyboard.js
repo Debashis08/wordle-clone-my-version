@@ -3,7 +3,7 @@ import {keys} from '../constants/Constants';
 import '../style/Keyboard.css';
 
 
-function Keyboard({boardData,handleKeyPress}) {
+function Keyboard({solution,correctCharArray,presentCharArray,absentCharArray,handleKeyPress}) {
     const handleKeyboard=(key)=> { 
         if (key.key === "Enter")
             handleKeyPress("ENTER")
@@ -22,18 +22,11 @@ function Keyboard({boardData,handleKeyPress}) {
       {keys.map((item,index)=>(
         <div className='row' key={index}>
             {
-                // item.map((key,keyIndex)=>(
-                //     <button key={keyIndex}
-                //     className={`${(boardData && (boardData.correctCharArray.indexOf(key)!==-1))?"key-correct":
-                //     ((boardData && (boardData.presentCharArray.indexOf(key)!==-1))?"key-present":
-                //     ((boardData && (boardData.absentCharArray.indexOf(key)!==-1))?"key-absent":""))}`}
-                //     onClick={()=>{handleKeyPress(key)}}>
-                //         {key}
-                //     </button>
-                // ))
-
                 item.map((key,keyIndex)=>(
                     <button key={keyIndex}
+                    className={`${(solution && (correctCharArray.indexOf(key)!==-1))?"key-correct":
+                    ((solution && (presentCharArray.indexOf(key)!==-1))?"key-present":
+                    ((solution && (absentCharArray.indexOf(key)!==-1))?"key-absent":""))}`}
                     onClick={()=>{handleKeyPress(key)}}>
                         {key}
                     </button>

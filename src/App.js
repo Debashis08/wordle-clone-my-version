@@ -18,19 +18,7 @@ function App() {
   const [charArray, setCharArray] = useState([]);
 
 
-  // const resetBoard=()=>{
-  //   var alphabetIndex=Math.floor(Math.random()*26);
-  //   var wordIndex=Math.floor(Math.random()*wordList[String.fromCharCode(97+alphabetIndex)].length);
-  //   setSolution(wordList[String.fromCharCode(97+alphabetIndex)][wordIndex]);
-  //   setRowIndex(0);
-  //   setBoardWords([]);
-  //   setBoardRowStatus([]);
-  //   setPresentCharArray([]);
-  //   setAbsentCharArray([]);
-  //   setCorrectCharArray([]);
-  //   setStatus("IN_PROGRESS");
-  // }
-
+  
   const handleMessage = (message) => {
     setMessage(message);
     setTimeout(() => {
@@ -83,11 +71,11 @@ function App() {
     }
     if (_matchCount === 5) {
       _status = "WIN";
-      handleMessage("you won");
+      handleMessage("You Won");
     }
     else if (_rowIndex + 1 === 6) {
       _status = "LOST";
-      handleMessage(_solution);
+      handleMessage("The Correct Word is: "+_solution.toUpperCase());
     }
     _boardWords[_rowIndex] = word;
     _boardRowStatus.push(_rowStatus);
@@ -160,7 +148,6 @@ function App() {
       setAbsentCharArray([]);
       setCorrectCharArray([]);
       setStatus("IN_PROGRESS");
-      // console.log("hello") //for testing
     }
   }, [setSolution, solution])
 
@@ -169,17 +156,16 @@ function App() {
 
   return (
     <div className='container'>
-      {solution}
+      {/* {solution} */}
       <div className='top'>
-        <div className='title'> wordle clone</div>
-        {/* <button className='reset-board' onClick={resetBoard}>{"\u27f3"}</button> */}
+        <div className='title'> WORDLE CLONE</div>
       </div>
       {message && <div className='message'>
         {message}
       </div>}
       <div className='cube'>
-        {[0, 1, 2, 3, 4, 5].map((row, rowIndex) => (
-          <div className={`cube-row ${solution && row === rowIndex && error && "error"}`} key={rowIndex}>
+        {[0, 1, 2, 3, 4, 5].map((row, _rowIndex) => (
+          <div className={`cube-row ${solution && row === rowIndex && error && "error"}`} key={_rowIndex}>
             {
               [0, 1, 2, 3, 4].map((column, letterIndex) => (
                 <div key={letterIndex} className={`letter ${solution && boardRowStatus[row] ? boardRowStatus[row][column] : ""}`}>
@@ -194,7 +180,7 @@ function App() {
 
       </div>
       <div className='bottom'>
-        <Keyboard handleKeyPress={handleKeyPress} />
+        <Keyboard solution={solution} correctCharArray={correctCharArray} presentCharArray={presentCharArray} absentCharArray={absentCharArray} handleKeyPress={handleKeyPress} />
       </div>
     </div>
 
